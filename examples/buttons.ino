@@ -16,6 +16,6 @@ void loop() {
     String buttonPressOutput;
     buttonHandler.read(buttonPressOutput);
     if (buttonPressOutput.length() > 0) {
-        Serial.println(buttonPressOutput); // Print the output only if it's not empty
+        Serial.println(buttonPressOutput);
     }
 }
