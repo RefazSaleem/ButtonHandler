@@ -1,0 +1,8 @@
+# Syntax: <KEYWORD> <KEYWORD1> <KEYWORD2> <KEYWORD3> <KEYWORD4> <KEYWORD5> <KEYWORD6> <KEYWORD7>
+ButtonHandler     KEYWORD1
+begin             KEYWORD2
+read              KEYWORD2
+checkButton       KEYWORD2
+debounceDelay     KEYWORD2
+multiPressInterval KEYWORD2
+longPressTime     KEYWORD2
