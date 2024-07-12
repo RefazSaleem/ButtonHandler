@@ -22,7 +22,7 @@ void ButtonHandler::begin(unsigned long debounceDelay, unsigned long multiPressI
 }
 
 void ButtonHandler::read(String& output) {
-    bool updated = false; // Flag to indicate if output has been updated
+    bool updated = false;
     output = "";
 
     for (int i = 0; i < numPins; i++) {
@@ -36,19 +36,19 @@ void ButtonHandler::read(String& output) {
             if (multiPressCounts[i] > 0) {
                 output = String(buttonPins[i]) + "x" + String(multiPressCounts[i]);
                 updated = true;
-                multiPressCounts[i] = 0; // Reset count after printing
-                printBuffers[i] = false; // Reset buffer flag
+                multiPressCounts[i] = 0;
+                printBuffers[i] = false;
             }
         }
     }
 
     if (!updated) {
-        output = ""; // Clear output if no update
+        output = "";
     }
 }
 
 bool ButtonHandler::checkButton(int index, String& output) {
-    bool updated = false; // Flag to indicate if output has been updated
+    bool updated = false;
     int reading = digitalRead(buttonPins[index]);
 
     if (reading != lastButtonStates[index]) {
@@ -63,19 +63,19 @@ bool ButtonHandler::checkButton(int index, String& output) {
                 pressStartTimes[index] = millis();
             } else {
                 unsigned long pressDuration = millis() - pressStartTimes[index];
-                if (pressDuration > longPressTime) { // Long press if greater than 0.5 seconds
+                if (pressDuration > longPressTime) {
                     output = String(buttonPins[index]) + "l";
                     updated = true;
-                    multiPressCounts[index] = 0; // Reset multi-press count on long press
-                    printBuffers[index] = false; // Reset buffer flag
+                    multiPressCounts[index] = 0;
+                    printBuffers[index] = false;
                 } else if (pressDuration > 0) {
                     if ((millis() - lastPressTimes[index]) <= multiPressInterval) {
                         multiPressCounts[index]++;
                     } else {
-                        multiPressCounts[index] = 1; // Reset count if not within interval
+                        multiPressCounts[index] = 1;
                     }
                     lastPressTimes[index] = millis();
-                    printBuffers[index] = true; // Set buffer flag to print later
+                    printBuffers[index] = true;
                     updated = true;
                 }
             }
